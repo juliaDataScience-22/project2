@@ -1,0 +1,35 @@
+Name,Type,MD code,Length,Measurement Type,Excluded
+Brand Code,Double,-9999,8,General,Categorical
+Carb Volume,Double,-9999,8,General,Auto
+Fill Ounces,Double,-9999,8,General,Auto
+PC Volume,Double,-9999,8,General,Auto
+Carb Pressure,Double,-9999,8,General,Auto
+Carb Temp,Double,-9999,8,General,Auto
+PSC,Double,-9999,8,General,Auto
+PSC Fill,Double,-9999,8,General,Auto
+PSC CO2,Double,-9999,8,General,Auto
+Mnf Flow,Double,-9999,8,General,Auto
+Carb Pressure1,Double,-9999,8,General,Auto
+Fill Pressure,Double,-9999,8,General,Auto
+Hyd Pressure1,Double,-9999,8,General,Auto
+Hyd Pressure2,Double,-9999,8,General,Auto
+Hyd Pressure3,Double,-9999,8,General,Auto
+Hyd Pressure4,Double,-9999,8,General,Auto
+Filler Level,Double,-9999,8,General,Auto
+Filler Speed,Double,-9999,8,General,Auto
+Temperature,Double,-9999,8,General,Auto
+Usage cont,Double,-9999,8,General,Auto
+Carb Flow,Double,-9999,8,General,Auto
+Density,Double,-9999,8,General,Auto
+MFR,Double,-9999,8,General,Auto
+Balling,Double,-9999,8,General,Auto
+Pressure Vacuum,Double,-9999,8,General,Auto
+PH,Double,-9999,8,General,Auto
+Oxygen Filler,Double,-9999,8,General,Auto
+Bowl Setpoint,Double,-9999,8,General,Auto
+Pressure Setpoint,Double,-9999,8,General,Auto
+Air Pressurer,Double,-9999,8,General,Auto
+Alch Rel,Double,-9999,8,General,Auto
+Carb Rel,Double,-9999,8,General,Auto
+Balling Lvl,Double,-9999,8,General,Auto
+sample,Double,-999999998,8,General,Auto
