@@ -1,0 +1,56 @@
+---
+title: "draftProject2"
+author: "Shaya Engelman, Julia Ferris, Amanda Fox, and Jean Jimenez"
+date: "2024-07-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+After completing the assignment, rework this as a Word Document to then submit.
+
+## Data Prep
+
+Import the data
+
+```{r}
+library(readr)
+dataToModel <- read_csv("https://raw.githubusercontent.com/juliaDataScience-22/project2/main/studentDataToModel.csv")
+View(dataToModel)
+
+columnTypes <- read_csv("https://raw.githubusercontent.com/juliaDataScience-22/project2/main/dataColumnTypes.csv")
+View(columnTypes)
+
+dataToPredict <- read_csv("https://raw.githubusercontent.com/juliaDataScience-22/project2/main/studentEvaluationToPredict.csv")
+View(dataToPredict)
+```
+
+Check for missing data
+
+Remove duplicates?
+
+Find errors, inconsistencies, outliers
+
+Normalization and standardization if needed
+
+Encode categorical variables
+
+Merge datasets
+
+Create new features from existing ones
+
+Select relevant features
+
+Split into test and train:
+
+
+
+## Exploratory Data Analysis
+
+## Model Selection / Evaluation
+
+## Conclusions
+
+## Sources
