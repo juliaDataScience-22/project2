@@ -50,7 +50,7 @@ na_plot2 <- na_df %>%
 na_plot2
 ggsave("missing.png", plot = na_plot2, width = 8, height = 5)
 
-# densityt plot from amelia package
+# density plot from amelia package
 missmap(data_raw, x.cex = 0.7, gap.xaxis = 0, 
         main = "Missing Data: Density Map by Variable")
 
@@ -132,6 +132,9 @@ ggsave("outliers.png", plot = plot_outlier, width = 16, height = 12)
 # 6. Scatterplots with Predictor Outliers Highlighted
 # -------------
 
+# copy of data_raw for outlier analysis
+data_outlier <- data_raw
+
 # numeric predictors only
 numeric_predictors <- names(data_raw)[sapply(data_raw, is.numeric) & 
                                         names(data_raw) != "PH"]
@@ -144,11 +147,11 @@ is_outlier <- function(x) {
 # loop
 for (var2 in numeric_predictors) {
   var2_fixed <- paste0("`", var2, "`")  
-  data_raw$outlier <- is_outlier(data_raw[[var2]])
+  data_outlier$outlier <- is_outlier(data_raw[[var2]])
   
-  scatter1 <- ggplot(data_raw, aes_string(x = var2_fixed, y = "`PH`")) +
+  scatter1 <- ggplot(data_outlier, aes_string(x = var2_fixed, y = "`PH`")) +
     geom_point() +
-    geom_point(data = subset(data_raw, outlier == TRUE), aes_string(x = var2_fixed, y = "`PH`"), color = 'red') +
+    geom_point(data = subset(data_outlier, outlier == TRUE), aes_string(x = var2_fixed, y = "`PH`"), color = 'red') +
     labs(title = paste("Scatter Plot of", var2, "vs. PH with Outliers Highlighted"),
          x = var2,
          y = "PH") +
@@ -158,3 +161,5 @@ for (var2 in numeric_predictors) {
   print(scatter1)
   ggsave(paste0("scatter-",var2_fixed,".png"), plot = scatter1, width = 8, height = 6)
 }
+
+
