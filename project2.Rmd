@@ -445,7 +445,7 @@ Earlier we selected the Cubist model as the best model based on its predictive p
 # Evaluate all the models on the testing data
 ols_pred <- predict(step_model, newdata = testing_data)
 pls_pred <- predict(pls_model, newdata = testing_data)
-enet_pred <- predict(enet_model, newdata = testing_data)
+enet_pred <- predict(enet_model_full, newdata = testing_data)
 rf_pred <- predict(rf_model, newdata = testing_data)
 cubist_first_pred <- predict(cubist_model, newdata = testing_data)
 svm_pred <- predict(svm_model, newdata = testing_data)
