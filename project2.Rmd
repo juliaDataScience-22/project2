@@ -24,12 +24,7 @@ library(Amelia)
 library(caret)
 ```
 
-
-
-
-#----------------------
-# 1. Summary Analysis
-#----------------------
+#---------------------- \# 1. Summary Analysis #----------------------
 
 #load data & re-order columns
 
@@ -41,10 +36,7 @@ data_raw <- data_raw |>
 summary(data_raw)
 ```
 
-
-#----------
-# 2. Missing Data
-#----------
+#---------- \# 2. Missing Data #----------
 
 ```{r}
 na_list <- sapply(data_raw, function(x) sum(is.na(x)))
@@ -80,10 +72,7 @@ missmap(data_raw, x.cex = 0.7, gap.xaxis = 0,
         main = "Missing Data: Density Map by Variable")
 ```
 
-
-
-#----------
-# 3. Frequency  
+#---------- \# 3. Frequency\
 #----------
 
 ```{r}
@@ -116,10 +105,10 @@ hist_plot
 ggsave("histogram.png", plot = hist_plot, width = 16, height = 12)
 ```
 
-
-
 # -------------
+
 # 4. Correlation Analysis
+
 # -------------
 
 ```{r}
@@ -148,10 +137,10 @@ plot_correlations
 ggsave("correlations.png", plot = plot_correlations, width = 12, height = 8)
 ```
 
-
-
 # -------------
+
 # 5. Boxplots for Outliers - not used
+
 # -------------
 
 ```{r}
@@ -166,9 +155,10 @@ plot_outlier
 ggsave("outliers.png", plot = plot_outlier, width = 16, height = 12)
 ```
 
-
 # -------------
+
 # 6. Scatterplots with Predictor Outliers Highlighted
+
 # -------------
 
 ```{r}
@@ -203,7 +193,6 @@ data_raw <- data_raw |>
   select(-outlier)
 ```
 
-
 ## Data Prep
 
 Import the data
@@ -215,6 +204,7 @@ View(columnTypes)
 dataToPredict <- read_csv("https://raw.githubusercontent.com/juliaDataScience-22/project2/main/studentEvaluationToPredict.csv")
 View(dataToPredict)
 ```
+
 Handle missing values
 
 ```{r}
@@ -264,9 +254,8 @@ df_Final_Data <- as.data.frame(encoded_data)
 
 ```
 
-
-
 Split into test and train:
+
 ```{r}
 # Install and load the caret package
 library(caret)
@@ -281,7 +270,6 @@ dim(training_data)
 dim(testing_data)
 
 ```
-
 
 ## Model Selection / Evaluation
 
@@ -336,7 +324,6 @@ pls_model1 <- plsr(pH ~ ., data = training_data, scale = TRUE, validation = "CV"
 tune_grid <- expand.grid(ncomp = 1:15)
 pls_model <- train(pH ~ ., data = training_data, method = "pls", trControl = trainControl(method = "cv", number = 10), tune_grid = tune_grid)
 ```
-
 
 The output of the PLS regression model showed that the R-squared (% variance explained) of the model using all the components was 0.437. However, the amount of variance explained started diminishing after the first few components and by the time 15 components were included, 43.18% of the variance was explained. Even though this project is not focusing on inference, the added components do not explain enough of the variance to justify the risks of overfititng the model to the data. For this model, we move forward with the 15 components that explain the most variance.
 
@@ -441,6 +428,7 @@ tuned_cubist_model <- train(pH ~ ., data = training_data, method = "cubist", trC
 ## Model Evaluation
 
 Earlier we selected the Cubist model as the best model based on its predictive performance. We then tuned the model to improve its performance even further. Now we confirm our choice by predicting all the models on the testing data and evaluating their performance using the Mean Absolute Percentage Error (MAPE) and Root Mean Squared Error (RMSE) metrics. These metrics will help us determine which model has the best predictive performance on unseen data to use towards the final predictions.
+
 ```{r}
 # Evaluate all the models on the testing data
 ols_pred <- predict(step_model, newdata = testing_data)
@@ -472,14 +460,14 @@ rmse_cubist_tuned <- sqrt(mean((testing_data$pH - cubist_tuned_pred)^2))
 # Create a data frame with the evaluation metrics
 evaluation_metrics <- data.frame(
   Model = c("OLS", "PLS", "ElasticNet", "Random_Forest", "Cubist_First", "SVM", "Cubist_Tuned"),
-  MAPE = c(mape_ols, mape_pls, mape_enet, mape_rf, mape_cubist, mape_svm, mape_cubist_tuned),
-  RMSE = c(rmse_ols, rmse_pls, rmse_enet, rmse_rf, rmse_cubist, rmse_svm, rmse_cubist_tuned)
+  MAPE = c(mape_ols, mape_pls, mape_enet, mape_rf, mape_cubist_first, mape_svm, mape_cubist_tuned),
+  RMSE = c(rmse_ols, rmse_pls, rmse_enet, rmse_rf, rmse_cubist_first, rmse_svm, rmse_cubist_tuned)
 )
 
 kable(evaluation_metrics)
 ```
 
-The table above shows that the Cubist models indeed have the best predictive performance on unseen data. Interestingly, the difference between the first Cubist model and the tuned Cubist model is minimal, indicating that the default parameters already performed well. 
+The table above shows that the Cubist models indeed have the best predictive performance on unseen data. Interestingly, the difference between the first Cubist model and the tuned Cubist model is minimal, indicating that the default parameters already performed well.
 
 ### Visualizations of relationships between predictors and response variable
 
@@ -515,7 +503,6 @@ plot(pdp_balling)
 plot(pdp_alchRel)
 plot(pdp_pressureVacuum)
 ```
-
 
 ## Predictions
 
@@ -560,7 +547,6 @@ sum(is.na(complete_eval$brandCode))
 colnames(df_Final_Eval)
 ```
 
-
 ```{r}
 # Predict the pH value
 predictions <- predict(tuned_cubist_model, newdata = df_Final_Eval)
@@ -571,5 +557,3 @@ dataToPredict$pH <- predictions
 # View the dataToPredict dataset with the predicted pH values
 View(dataToPredict)
 ```
-
-
