@@ -557,3 +557,9 @@ dataToPredict$pH <- predictions
 # View the dataToPredict dataset with the predicted pH values
 View(dataToPredict)
 ```
+
+```{r}
+summary <- t(summary(data_raw))
+library(kableExtra)
+kable(summary)
+```
