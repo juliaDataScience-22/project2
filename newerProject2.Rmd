@@ -587,6 +587,8 @@ dataToPredict$pH <- predictions
 
 # View the dataToPredict dataset with the predicted pH values
 View(dataToPredict)
+
+write.csv(dataToPredict, 'export_data_for_submission.csv')
 ```
 
 
